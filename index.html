@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ping-Pong Game Setup</title>
+    <link rel="stylesheet" href="game.css">
+</head>
+<body>
+    <div class="game-setup">
+        <label for="player1-pic">Player 1 Picture (optional):</label>
+        <input type="file" id="player1-pic" accept="image/*"><br>
+        <button id="start-game">Start Game</button>
+    </div>
+
+    <script>
+        document.getElementById("start-game").addEventListener("click", () => {
+            const player1Pic = document.getElementById("player1-pic").files[0];
+            if (player1Pic) {
+                const reader = new FileReader();
+                reader.onload = function (event) {
+                    sessionStorage.setItem('player1Pic', event.target.result);
+                    window.location.href = "game.html";
+                };
+                reader.readAsDataURL(player1Pic);
+            } else {
+                window.location.href = "game.html";
+            }
+        });
+    </script>
+</body>
+</html>
